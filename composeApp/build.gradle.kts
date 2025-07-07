@@ -29,7 +29,6 @@ kotlin {
     }
     
     sourceSets {
-        
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -43,6 +42,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.firebase.auth)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -65,6 +65,7 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+
     }
     buildTypes {
         getByName("release") {
@@ -79,6 +80,5 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
-    implementation("com.google.firebase:firebase-common-ktx:20.3.3")
 }
 
