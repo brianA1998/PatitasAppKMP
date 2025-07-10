@@ -1,4 +1,4 @@
-package com.patitasapp.kmp.authentication.presentation
+package com.patitasapp.kmp.authentication.presentation.login
 
 sealed interface LoginEvent {
     data class EmailChanged(val email: String) : LoginEvent

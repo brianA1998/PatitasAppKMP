@@ -14,6 +14,7 @@ composeMultiplatform = "1.8.1"
 firebaseAuth = "2.1.0"
 junit = "4.13.2"
 kotlin = "2.1.21"
+ui = "1.6.7"
 
 [libraries]
 firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseAuth" }

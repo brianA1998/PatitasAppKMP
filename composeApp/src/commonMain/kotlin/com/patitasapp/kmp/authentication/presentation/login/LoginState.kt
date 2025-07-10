@@ -1,4 +1,4 @@
-package com.patitasapp.kmp.authentication.presentation
+package com.patitasapp.kmp.authentication.presentation.login
 
 import com.patitasapp.kmp.authentication.domain.model.User
 
