@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">PatitasApp</string>
+    <!-- Onboarding strings -->
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="get_started">Get Started</string>
+    <string name="onboarding_title_1">Bienvenido a patitas App</string>
+    <string name="onboarding_subtitle_1">¡Un hogar para cada mascota, empieza acá!</string>
+    <string name="onboarding_title_2">Tu compañero te espera</string>
+    <string name="onboarding_subtitle_2">Descubre mascotas que esperan por un hogar lleno de amor</string>
+    <string name="onboarding_title_3">¡Todo listo para empezar!</string>
+    <string name="onboarding_subtitle_3">Tu próximo compañero está a un click de distancia. ¡Vamos!</string>
+
+
+    <!-- Validation Login strings -->
+    <string name="password_empty">La contraseña esta vacia</string>
+    <string name="password_min_length">La contraseña tiene que tener al menos 8 caracteres</string>
+    <string name="password_lowercase">La contraseña tiene que tener al menos 1 caracter en minúscula</string>
+    <string name="password_uppercase">La contraseña tiene que tener al menos 1 caracter en mayúscula</string>
+    <string name="password_digit">La contraseña tiene que tener al menos 1 número</string>
+
+    <!-- Home strings -->
+    <string name="title_home">Adopción mascota</string>
+
+</resources>
