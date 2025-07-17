@@ -1,6 +1,7 @@
 package com.patitasapp.kmp.onboarding.presentation
 
 import androidx.compose.runtime.Composable
+import com.patitasapp.kmp.onboarding.presentation.components.OnboardingPager
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import patitasappkmp.composeapp.generated.resources.Res
 import patitasappkmp.composeapp.generated.resources.onboarding1
@@ -44,8 +45,8 @@ fun OnboardingScreen(
         )
     )
 
-//    // Display the onboarding pager
-//    OnboardingPager(pages = pages, onFinish = {
-////        viewModel.completeOnboarding()
-//    })
+    // Display the onboarding pager
+    OnboardingPager(pages = pages, onFinish = {
+//        viewModel.completeOnboarding()
+    })
 }

@@ -43,6 +43,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.firebase.auth)
+            implementation(libs.accompanist.pager)
+            implementation(libs.accompanist.pager.indicators)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

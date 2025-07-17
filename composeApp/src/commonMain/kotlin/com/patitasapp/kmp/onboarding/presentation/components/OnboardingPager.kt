@@ -27,7 +27,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.patitasapp.kmp.onboarding.presentation.OnboardingPagerInformation
 import kotlinx.coroutines.launch
+import androidx.compose.material3.Text
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import com.patitasapp.kmp.core.presentation.PatitasButton
+import com.patitasapp.kmp.core.presentation.PatitasTitle
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun OnboardingPager(
@@ -35,12 +42,13 @@ fun OnboardingPager(
     modifier: Modifier = Modifier,
     onFinish: () -> Unit,
 ) {
-
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { pages.size })
     val coroutineScope = rememberCoroutineScope()
 
     Box(modifier = modifier.background(Color.White)) {
-        HorizontalPager(count = pages.size, state = pagerState) { indexPage ->
+        HorizontalPager(
+            state = pagerState
+        ) { indexPage ->
             val information = pages[indexPage]
             Column(
                 modifier = Modifier
@@ -49,17 +57,17 @@ fun OnboardingPager(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.height(32.dp))
-                PatitasTitle(title = information.title)
+                PatitasTitle(title = information.title.toString())
                 Spacer(modifier = Modifier.height(32.dp))
                 Image(
-                    painter = painterResource(id = information.image),
+                    painter = painterResource(information.imageResId),
                     contentDescription = "onboarding",
                     modifier = Modifier.aspectRatio(1f),
                     contentScale = ContentScale.FillHeight
                 )
                 Spacer(modifier = Modifier.height(90.dp))
                 Text(
-                    information.subtitle.uppercase(),
+                    information.subtitle.toString().uppercase(),
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.tertiary
@@ -69,7 +77,6 @@ fun OnboardingPager(
             }
         }
 
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -78,10 +85,9 @@ fun OnboardingPager(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-
             if (pagerState.currentPage == pages.lastIndex) {
                 PatitasButton(
-                    stringResource(id = R.string.get_started),
+                    "get_started",
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     onFinish()
@@ -94,21 +100,25 @@ fun OnboardingPager(
                         .background(Color(0xFFCAD2C5))
                 ) {
                     Text(
-                        stringResource(id = R.string.skip),
+                        "skip",
                         color = Color.White,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
 
-                HorizontalPagerIndicator(
-                    pagerState = pagerState,
+                PatitasPagerIndicator(
+                    pageCount = pages.size,
+                    currentPage = pagerState.currentPage,
                     activeColor = MaterialTheme.colorScheme.tertiary,
                     inactiveColor = MaterialTheme.colorScheme.primary
                 )
+
                 TextButton(
                     onClick = {
                         coroutineScope.launch {
-                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                            if (pagerState.currentPage < pages.lastIndex) {
+                                pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                            }
                         }
                     },
                     modifier = Modifier
@@ -117,7 +127,7 @@ fun OnboardingPager(
                         .background(Color(0xFF52796F)),
                 ) {
                     Text(
-                        stringResource(id = R.string.next),
+                        "next",
                         color = Color.White,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
