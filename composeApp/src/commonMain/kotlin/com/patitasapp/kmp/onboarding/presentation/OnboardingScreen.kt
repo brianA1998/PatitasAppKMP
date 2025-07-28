@@ -19,12 +19,12 @@ import patitasappkmp.composeapp.generated.resources.onboarding_title_3
 @Composable
 fun OnboardingScreen(
     onFinish: () -> Unit,
-//    viewModel: OnboardingViewModel = OnboardingViewModel()
+    viewModel: OnboardingViewModel = OnboardingViewModel()
 ) {
-//    if (viewModel.hasSeenOnboarding) {
-//        onFinish()
-//        return
-//    }
+    if (viewModel.hasSeenOnboarding) {
+        onFinish()
+        return
+    }
 
     // Define the onboarding pages
     val pages = listOf(
@@ -47,6 +47,6 @@ fun OnboardingScreen(
 
     // Display the onboarding pager
     OnboardingPager(pages = pages, onFinish = {
-//        viewModel.completeOnboarding()
+        viewModel.completeOnboarding()
     })
 }

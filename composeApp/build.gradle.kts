@@ -32,10 +32,14 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
-            implementation(compose.foundation)
+            implementation(compose.foundation) {
+                exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-android")
+            }
             implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
@@ -45,10 +49,16 @@ kotlin {
             implementation(libs.firebase.auth)
             implementation(libs.accompanist.pager)
             implementation(libs.accompanist.pager.indicators)
+            implementation(libs.androidx.datastore)
+            implementation(libs.androidx.datastore.preferences)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+    }
+
+    configurations.all {
+        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-android")
     }
 }
 
