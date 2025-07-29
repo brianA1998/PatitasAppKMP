@@ -1,16 +1,19 @@
 package com.patitasapp.kmp.onboarding.presentation
 
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.patitasapp.kmp.onboarding.domain.usecase.CompleteOnboardingUseCase
 import com.patitasapp.kmp.onboarding.domain.usecase.HasSeenOnboardingUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class OnboardingViewModel(
     hasSeenUseCase: HasSeenOnboardingUseCase,
     private val completeUseCase: CompleteOnboardingUseCase
-) {
-    private val _hasSeen = hasSeenUseCase() // Flow<Boolean>
+) : ViewModel() {
+    private val _hasSeen = hasSeenUseCase()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,

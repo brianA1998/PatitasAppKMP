@@ -2,7 +2,6 @@ package com.patitasapp.kmp.onboarding.presentation
 
 import androidx.compose.runtime.Composable
 import com.patitasapp.kmp.onboarding.presentation.components.OnboardingPager
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import patitasappkmp.composeapp.generated.resources.Res
 import patitasappkmp.composeapp.generated.resources.onboarding1
 import patitasappkmp.composeapp.generated.resources.onboarding2
@@ -15,11 +14,10 @@ import patitasappkmp.composeapp.generated.resources.onboarding_title_2
 import patitasappkmp.composeapp.generated.resources.onboarding_title_3
 
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun OnboardingScreen(
     onFinish: () -> Unit,
-    viewModel: OnboardingViewModel = OnboardingViewModel()
+    viewModel:  OnboardingViewModel
 ) {
     if (viewModel.hasSeenOnboarding) {
         onFinish()
