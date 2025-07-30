@@ -1,19 +1,27 @@
 package com.patitasapp.kmp.datastore
 
-import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import com.patitasapp.kmp.core.utils.ONBOARDING_PREFERENCES_FILE
-import com.patitasapp.kmp.core.utils.createDataStore
-import java.io.File
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import com.patitasapp.kmp.navigation.NavigationHost
+import com.patitasapp.kmp.authentication.data.repository.AuthRepositoryImpl
+import com.patitasapp.kmp.authentication.data.source.FirebaseAuthDataSource
+import com.patitasapp.kmp.authentication.domain.usecase.SignInUseCase
+import com.patitasapp.kmp.authentication.presentation.login.LoginViewModel
+import com.patitasapp.kmp.onboarding.data.OnboardingRepositoryImpl
 
-/**
- * Creates a DataStore instance for storing onboarding preferences.
- *
- * @param context The Android context used to access the file system.
- * @return A DataStore instance for onboarding preferences.
- */
-fun createDataStoreAndroid(context: Context): DataStore<Preferences> =
-    createDataStore(
-        producePath = { File(context.filesDir, ONBOARDING_PREFERENCES_FILE).absolutePath }
+@Composable
+fun AppAndroid() {
+    val context = LocalContext.current
+    NavigationHost(
+        createOnboardingRepo = {
+            val ds = createDataStoreAndroid(context)
+            OnboardingRepositoryImpl(ds)
+        },
+        createAuthDeps = {
+            val repo = AuthRepositoryImpl(FirebaseAuthDataSource())
+            val use = SignInUseCase(repo)
+            val vm = LoginViewModel(use)
+            use to vm
+        }
     )
+}
