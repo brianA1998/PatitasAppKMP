@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.patitasapp.kmp.authentication.presentation.login.LoginScreen
 import com.patitasapp.kmp.authentication.presentation.login.LoginViewModel
 import com.patitasapp.kmp.home.presentation.HomeScreen
+import com.patitasapp.kmp.home.presentation.HomeViewModel
 
 @Composable
 fun AppNavHost(
@@ -28,7 +29,15 @@ fun AppNavHost(
             )
         }
         composable(Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(
+                viewModel = HomeViewModel(), // o inyectado desde afuera
+                onPetClick = { pet ->
+                    // por ejemplo: navController.navigate(Screen.PetDetail.createRoute(pet.id))
+                },
+                onBottomAction = { index ->
+                    // manejar acciones de la bottom bar
+                }
+            )
         }
 
     }
