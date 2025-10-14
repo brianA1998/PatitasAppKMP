@@ -30,12 +30,12 @@ class HomeViewModel {
 
     private fun generateMockPets(): List<Pet> {
         return listOf(
-            Pet(id = "1", name = "Samantha", gender = Gender.FEMALE),
-            Pet(id = "2", name = "Tigri", gender = Gender.MALE),
-            Pet(id = "3", name = "Luna", gender = Gender.FEMALE),
-            Pet(id = "4", name = "Max", gender = Gender.MALE),
-            Pet(id = "5", name = "Milo", gender = Gender.MALE),
-            Pet(id = "6", name = "Nala", gender = Gender.FEMALE)
+            Pet("1", "Samantha", Gender.FEMALE, "https://share.google/images/zB4BpNhFaKEGob6Qc"),
+            Pet("2", "Tigri", Gender.MALE, "https://placekitten.com/401/401"),
+            Pet("3", "Luna", Gender.FEMALE, "https://picsum.photos/400/400"),
+            Pet("4", "Max", Gender.MALE, "https://picsum.photos/401/401"),
+            Pet("5", "Milo", Gender.MALE, "https://placekitten.com/402/402"),
+            Pet("6", "Nala", Gender.FEMALE, "https://picsum.photos/402/402")
         )
     }
 

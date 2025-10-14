@@ -44,6 +44,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.firebase.auth)
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.9.0")
+            implementation("io.coil-kt.coil3:coil-compose:3.0.4")
+
 
         }
         commonTest.dependencies {

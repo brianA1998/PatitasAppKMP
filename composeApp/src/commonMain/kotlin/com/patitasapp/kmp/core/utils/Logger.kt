@@ -5,6 +5,7 @@ package com.patitasapp.kmp.core.utils
  */
 object Logger {
     private const val TAG_AUTH = "PatitasAuth"
+    private const val TAG_GENERIC = "GenericLog"
 
     /**
      * Log para la capa de presentación del flujo de autenticación
@@ -32,5 +33,13 @@ object Logger {
      */
     fun authFirebase(message: String) {
         println("$TAG_AUTH [Firebase] - $message")
+    }
+
+
+    /**
+     * Log para la capa de datos externos (Firebase) del flujo de autenticación
+     */
+    fun genericMessage(message: String) {
+        println("$TAG_GENERIC - $message")
     }
 }

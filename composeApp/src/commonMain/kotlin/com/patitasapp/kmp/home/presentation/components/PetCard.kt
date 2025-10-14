@@ -3,7 +3,6 @@ package com.patitasapp.kmp.home.presentation.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,10 +18,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.request.ImageRequest
+import com.patitasapp.kmp.core.utils.Logger
 import com.patitasapp.kmp.home.domain.Gender
 import com.patitasapp.kmp.home.domain.Pet
 
@@ -31,30 +34,42 @@ fun PetCard(pet: Pet, onClick: () -> Unit = {}) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp)
             .clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            // Imagen placeholder (reemplazar por AsyncImage cuando tengas URLs)
-            Box(
+
+
+            Logger.genericMessage("Antes de AsyncImage" + pet.imagenUrl)
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(pet.imagenUrl)
+                    .crossfade(true)
+                    .listener(
+                        onError = { _, result ->
+                            result.throwable.printStackTrace()
+                            Logger.genericMessage("❌ Coil error: ${result.throwable.message}")
+                        },
+                        onSuccess = { _, _ ->
+                            Logger.genericMessage("✅ Coil success para ${pet.name}")
+                        }
+                    )
+                    .build(),
+                contentDescription = pet.name,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(120.dp)
+                    .height(180.dp)
                     .background(Color.LightGray),
-                contentAlignment = Alignment.Center
-            ) {
-                // placeholder text
-                Text(text = "Imagen", color = Color.DarkGray)
-            }
+                contentScale = ContentScale.Crop
+            )
 
-            Spacer(modifier = Modifier.height(8.dp))
-
+            pet.imagenUrl?.let { Logger.genericMessage(it) }
+            // 🐾 Info básica
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 12.dp),
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -74,7 +89,7 @@ fun PetCard(pet: Pet, onClick: () -> Unit = {}) {
                     )
                 }
 
-                // gender icon simple
+                // ♂ / ♀ símbolo
                 Text(
                     text = when (pet.gender) {
                         Gender.MALE -> "♂"
@@ -82,7 +97,7 @@ fun PetCard(pet: Pet, onClick: () -> Unit = {}) {
                         Gender.OTHER -> ""
                     },
                     fontSize = 18.sp,
-                    modifier = Modifier.padding(start = 8.dp)
+                    color = if (pet.gender == Gender.MALE) Color.Blue else Color.Magenta
                 )
             }
         }
